@@ -1,0 +1,1737 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fms Remit Online - La Nueva Referencia Bancaria </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e3c72;
+            --secondary: #2a5298;
+            --accent: #ff6b6b;
+            --light: #f8f9fa;
+            --dark: #333;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --gradient: linear-gradient(135deg, #1e3c72, #2a5298);
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f7fa;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        /* Header */
+        header {
+            background: var(--gradient);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            color: #ffd700;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+            position: relative;
+            font-weight: 500;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #ffd700;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+
+        .language-selector {
+    position: relative;
+    display: inline-block;
+    color:  gold
+}
+
+.language-btn {
+    background: #1e3c72;
+    color: gold;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.language-dropdown {
+    display: none; /* caché par défaut */
+    position: absolute;
+    top: 110%;
+    left: 0;
+    background: white;
+    border-radius: 6px;
+    box-shadow: 0px 4px 10px blue;
+    z-index: 1000;
+    min-width: 160px;
+}
+
+.language-option {
+    padding: 4px;
+    cursor: pointer;
+}
+
+.language-option:hover {
+    background: blue;
+}
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        /* Section générique */
+        section {
+            padding: 5rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--secondary);
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--gradient);
+            color: white;
+            text-align: center;
+            padding: 10rem 2rem 2rem;
+            margin-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
+            background-size: cover;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .cta-button {
+            background: #ffd700;
+            color: #333;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            animation: fadeInUp 1s ease 0.4s both;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.4);
+        }
+
+        /* Services Section */
+        .services {
+            background: var(--light);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2.5rem 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .service-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+        }
+
+        .service-card h3 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .service-card p {
+            margin-bottom: 1.5rem;
+            color: #666;
+        }
+
+        .promo-badge {
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: var(--accent);
+            color: gold;
+            padding: 0.5rem 2rem;
+            transform: rotate(45deg);
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            color: var(--secondary);
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .stat-item i {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .stat-item .number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--secondary);
+            display: block;
+        }
+
+        .stat-item .label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Banking Interface */
+        .banking-interface {
+            background: var(--light);
+            padding: 5rem 2rem;
+        }
+
+        .banking-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            gap: 1rem;
+        }
+
+        .banking-tab {
+            padding: 1rem 2rem;
+            background: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: var(--shadow);
+        }
+
+        .banking-tab.active {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .banking-content {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .tab-pane {
+            display: none;
+        }
+
+        .tab-pane.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .balance-card {
+            background: var(--gradient);
+            color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .balance-card::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .balance-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .balance-amount {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+
+        .account-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+        }
+
+        .account-number {
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+        }
+
+        .account-type {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+        }
+
+        .transaction-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.1);
+        }
+
+        .transaction-history {
+            margin-top: 2rem;
+        }
+
+        .transaction-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            align-items: center;
+        }
+
+        .transaction-item:last-child {
+            border-bottom: none;
+        }
+
+        .transaction-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .transaction-icon {
+            width: 40px;
+            height: 40px;
+            background: #f0f5ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary);
+        }
+
+        .transaction-details h4 {
+            margin-bottom: 0.2rem;
+            font-size: 1rem;
+        }
+
+        .transaction-details p {
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        .transaction-amount {
+            font-weight: bold;
+        }
+
+        .transaction-amount.negative {
+            color: var(--danger);
+        }
+
+        .transaction-amount.positive {
+            color: var(--success);
+        }
+
+        /* E-commerce Section */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-50px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            height: 200px;
+            background: #f5f7fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .product-info {
+            padding: 1.2rem;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .product-description {
+            color: #666;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            height: 60px;
+            overflow: hidden;
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .product-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .buy-btn {
+            background: var(--secondary);
+            color: gold;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+            flex-grow: 1;
+            margin-right: 0.5rem;
+        }
+
+        .buy-btn:hover {
+            background: var(--primary);
+        }
+
+        .cart-btn {
+            background: gold;
+            color: var(--secondary);
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+
+        .cart-btn:hover {
+            background: #e0ebff;
+        }
+
+        /* Transaction Security */
+        .security-steps {
+            display: flex;
+            justify-content: space-between;
+            margin: 3rem 0;
+            position: relative;
+        }
+
+        .security-steps::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #e9ecef;
+            z-index: 1;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+        }
+
+        .step-icon {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border: 3px solid #e9ecef;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            color: #adb5bd;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .step.active .step-icon {
+            background: var(--secondary);
+            border-color: var(--secondary);
+            color: white;
+        }
+
+        .step.completed .step-icon {
+            background: var(--success);
+            border-color: var(--success);
+            color: white;
+        }
+
+        .step-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .step-desc {
+            font-size: 0.9rem;
+            color: #6c757d;
+            max-width: 200px;
+            margin: 0 auto;
+        }
+
+        .security-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            margin-top: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 3rem 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: #ffd700;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: gold(--secondary);
+            color: gold;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .transaction-form {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: var(--primary);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+
+            .security-steps {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .security-steps::before {
+                display: none;
+            }
+
+            .step {
+                display: flex;
+                align-items: center;
+                text-align: left;
+                gap: 1rem;
+            }
+
+            .step-icon {
+                margin: 0;
+                flex-shrink: 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero {
+                padding: 8rem 1.5rem 4rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .balance-amount {
+                font-size: 2rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }/* Modal de connexion */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.active {
+    display: flex;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    position: relative;
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #999;
+}
+
+.close-modal:hover {
+    color: var(--dark);
+}
+
+.auth-form {
+    margin-top: 1.5rem;
+}
+
+.auth-tabs {
+    display: flex;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.auth-tab {
+    padding: 0.8rem 1.5rem;
+    cursor: pointer;
+    font-weight: 600;
+    color: #999;
+    border-bottom: 3px solid transparent;
+}
+
+.auth-tab.active {
+    color: var(--secondary);
+    border-bottom: 3px solid var(--secondary);
+}
+
+.banking-private {
+    display: none;
+}
+
+.login-required {
+    text-align: center;
+    padding: 3rem;
+    background: white;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+}
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+<div class="auth-buttons">
+  <button class="cta-button" id="login-btn" style="padding: 0.5rem 0.5rem;">Iniciar Sesión</button>
+</div>
+            <div class="logo">
+                <i class="fas fa-landmark"></i>
+                <span>Fms Remit Online</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#inicio" data-i18n class="active">Inicio</a></li>
+                <li><a href="#servicios" data-i18n>Servicios</a></li>
+                <li><a href="#banking" data-i18n>Banca en línea</a></li>
+                <li><a href="#tienda" data-i18n>Tienda</a></li>
+                <li><a href="#nosotros" data-i18n>Nosotros</a></li>
+                <li><a href="#contacto" data-i18n>Contacto</a></li>
+            </ul>
+            <div class="language-selector">
+                <button class="language-btn">
+                    <i class="fas fa-globe"></i>
+                    ES
+                </button>
+                <div class="language-dropdown">
+                    <div class="language-option" data-lang="fr">
+                        <span>Français</span>
+                    </div>
+                    <div class="language-option" data-lang="en">
+                        <span>English</span>
+                    </div>
+                    <div class="language-option" data-lang="pt">
+                        <span>Português</span>
+                    </div>
+                    <div class="language-option" data-lang="ar">
+                        <span>العربية</span>
+                    </div>
+                    <div class="language-option" data-lang="de">
+                        <span>Deutsch</span>
+                    </div>
+                    <div class="language-option" data-lang="ru">
+                        <span>Русский</span>
+                    </div>
+                    <div class="language-option" data-lang="hr">
+                        <span>Hrvatski</span>
+                    </div>
+                    <div class="language-option" data-lang="sr">
+                        <span>Српски</span>
+                    </div>
+                    <div class="language-option" data-lang="no">
+                        <span>Norsk</span>
+                    </div>
+                    <div class="language-option" data-lang="ja">
+                        <span>日本語</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+<!-- Modal de connexion -->
+<div class="modal" id="auth-modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2 style="text-align: center; margin-bottom: 1.5rem;">Acceso Clientes</h2>
+        <div class="auth-tabs">
+            <div class="auth-tab active" data-tab="login">Iniciar Sesión</div>
+            <div class="auth-tab" data-tab="register">Registrarse</div>
+        </div>
+        <form class="auth-form" id="login-form">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit" class="cta-button" style="width: 100%;">Acceder</button>
+        </form>
+        <form class="auth-form" id="register-form" style="display: none;">
+            <div class="form-group">
+                <label for="reg-name">Nombre completo</label>
+                <input type="text" id="reg-name" name="reg-name" required>
+            </div>
+            <div class="form-group">
+                <label for="reg-email">Email</label>
+                <input type="email" id="reg-email" name="reg-email" required>
+            </div>
+            <div class="form-group">
+                <label for="reg-password">Contraseña</label>
+                <input type="password" id="reg-password" name="reg-password" required>
+            </div>
+            <div class="form-group">
+                <label for="reg-confirm">Confirmar contraseña</label>
+                <input type="password" id="reg-confirm" name="reg-confirm" required>
+            </div>
+            <button type="submit" class="cta-button" style="width: 100%;">Crear Cuenta</button>
+        </form>
+    </div>
+</div>
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h1>La Nueva Cara de las Finanzas</h1>
+            <p>Experiencia, confianza y soluciones personalizadas para todos sus proyectos financieros</p>
+            <a href="#banking" class="cta-button">Acceder a mi cuenta</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicios" class="services">
+        <h2 class="section-title">Nuestros Servicios</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-hand-holding-usd"></i>
+                </div>
+                <h3>Crédito y Financiación</h3>
+                <p>Soluciones de crédito adaptadas a sus necesidades: personal, inmobiliario, profesional. Acompañamiento personalizado y tipos competitivos.</p>
+                <div class="promo-badge">-2% de interés</div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Asesoramiento en Inversiones</h3>
+                <p>Estrategias de inversión a medida para optimizar su patrimonio. Análisis de mercado y seguimiento personalizado.</p>
+                <div class="promo-badge">+5% rentabilidad</div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Seguros y Protección</h3>
+                <p>Cobertura completa para usted y su familia. Seguros de vida, salud, hogar con las mejores garantías del mercado.</p>
+                <div class="promo-badge">-15% primer año</div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-home"></i>
+                </div>
+                <h3>Inmobiliario</h3>
+                <p>Acompañamiento completo en sus proyectos inmobiliarios: compra, venta, inversión en alquiler y desgravación fiscal.</p>
+                <div class="promo-badge">Sin comisión</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Banking Interface Section -->
+    <section id="banking" class="banking-interface">
+    <h2 class="section-title">Banca en Línea</h2>
+    
+    <div class="login-required" id="banking-login-required">
+        <i class="fas fa-lock" style="font-size: 3rem; color: #ccc; margin-bottom: 1.5rem;"></i>
+        <h3>Acceso exclusivo para clientes</h3>
+        <p>Para acceder a su banca en línea, debe iniciar sesión con sus credenciales.</p>
+        <button class="cta-button" id="banking-login-btn">Iniciar Sesión</button>
+    </div>
+    
+    <div class="banking-private" id="banking-private">
+        <!-- Le contenu bancaire original ira ici -->
+        <div class="banking-tabs">
+            <button class="banking-tab active" data-tab="overview">Resumen</button>
+            <button class="banking-tab" data-tab="transfer">Transferencias</button>
+            <button class="banking-tab" data-tab="history">Historial</button>
+            <button class="banking-tab" data-tab="cards">Tarjetas</button>
+        </div>
+        <div class="banking-content">
+            <!-- ... le reste du contenu bancaire ... -->
+        </div>
+    </div>
+    </section>
+
+    <!-- E-commerce Section -->
+    <section id="tienda" class="products-section">
+        <h2 class="section-title">Tienda Online</h2>
+        <p style="text-align: center; margin-bottom: 2rem;">Descubre nuestros productos exclusivos con envío gratuito</p>
+        
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1606813907291-d86efa9b94db?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1352&q=80" alt="PlayStation 5">
+</div>
+                <div class="product-info">
+                    <h3 class="product-title">PlayStation 5</h3>
+                    <p class="product-description">Consola de última generación con SSD ultrarrápido y gráficos 4K.</p>
+                    <div class="product-price">€549.99</div>
+                    <div class="product-actions">
+                        <button class="buy-btn">Comprar</button>
+                        <button class="cart-btn"><i class="fas fa-shopping-cart"></i></button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="iPhone 14 Pro">
+                <div class="product-info">
+                    <h3 class="product-title">iPhone 14 Pro</h3>
+                    <p class="product-description">Smartphone premium con cámara de 48MP y Dynamic Island.</p>
+                    <div class="product-price">€1,199.99</div>
+                    <div class="product-actions">
+                        <button class="buy-btn">Comprar</button>
+                        <button class="cart-btn"><i class="fas fa-shopping-cart"></i></button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1160&q=80" alt="Samsung QLED 4K">
+                <div class="product-info">
+                    <h3 class="product-title">Samsung QLED 4K</h3>
+                    <p class="product-description">Televisor 55" QLED con resolución 4K y Quantum HDR.</p>
+                    <div class="product-price">€899.99</div>
+                    <div class="product-actions">
+                        <button class="buy-btn">Comprar</button>
+                        <button class="cart-btn"><i class="fas fa-shopping-cart"></i></button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1580522154071-c6ca47a859ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Volante Gaming G29">
+                <div class="product-info">
+                    <h3 class="product-title">Volante Gaming G29</h3>
+                    <p class="product-description">Volante force feedback para PS5/PS4/PC con paletas de cambio.</p>
+                    <div class="product-price">€299.99</div>
+                    <div class="product-actions">
+                        <button class="buy-btn">Comprar</button>
+                        <button class="cart-btn"><i class="fas fa-shopping-cart"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="nosotros">
+        <div class="about-content">
+            <div class="about-text">
+                <h2>Acerca de Nosotros</h2>
+                <p>Desde el <strong>3 de noviembre de 2010</strong>, <strong>Fms Remit Online</strong> acompaña a particulares y profesionales en la realización de sus proyectos financieros.</p>
+                <p>Nuestro equipo de expertos certificados pone a su disposición su experiencia y su red de socios para ofrecerle las mejores soluciones del mercado.</p>
+                <p>Creemos en un enfoque transparente y personalizado, donde cada cliente se beneficia de un asesoramiento adaptado a su situación única.</p>
+                
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <i class="fas fa-users"></i>
+                        <span class="number">78,683</span>
+                        <span class="label">Clientes satisfechos</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-project-diagram"></i>
+                        <span class="number">15</span>
+                        <span class="label">Años de experiencia</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-euro-sign"></i>
+                        <span class="number">245M</span>
+                        <span class="label">En activos gestionados</span>
+                    </div>
+                </div>
+            </div>
+            <div class="about-image">
+                <div>
+                    <i class="fas fa-award" style="font-size: 3rem;"></i>
+                    <div>🏆 15 años de experiencia</div>
+                    <div>✅ +78.683 clientes satisfechos</div>
+                    <div>🎯 Soluciones a medida</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contacto">
+        <h2 class="section-title">Contáctanos</h2>
+        <div class="contact-content">
+            <div class="contact-form">
+                <h3>Solicitud de Contacto</h3>
+                <form>
+                    <div class="form-group">
+                        <label for="nombre">Nombre completo*</label>
+                        <input type="text" id="nombre" name="nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email*</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono">Teléfono</label>
+                        <input type="tel" id="telefono" name="telefono">
+                    </div>
+                    <div class="form-group">
+                        <label for="servicio">Servicio deseado</label>
+                        <select id="servicio" name="servicio">
+                            <option value="">Seleccione un servicio</option>
+                            <option value="credito">Crédito y Financiación</option>
+                            <option value="inversion">Asesoramiento en Inversiones</option>
+                            <option value="seguros">Seguros y Protección</option>
+                            <option value="inmobiliario">Inmobiliario</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="mensaje">Mensaje*</label>
+                        <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="cta-button" style="width: 100%; margin-top: 1rem;">Enviar mi solicitud</button>
+                </form>
+            </div>
+            <div class="contact-info">
+                <h3>Nuestros Datos de Contacto</h3>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <strong>Dirección</strong><br>
+                        Avinguda Olivia, 543, Bajo 8°<br>
+                        La Coruña, España
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <div>
+                        <strong>Teléfono</strong><br>
+                        +33 7 55 54 78 38
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <strong>Email</strong><br>
+                        fmsremitonline@proton.me
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <strong>Horarios</strong><br>
+                        Lun-Sáb: 24 horas<br>
+                        Domingo: 9h00-20h00
+                    </div>
+                </div>
+                
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Fms Remit Online</h3>
+                <p>La nueva referencia en servicios financieros, ofreciendo soluciones personalizadas desde 2010.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Enlaces Rápidos</h3>
+                <ul class="footer-links">
+                    <li><a href="#inicio"><i class="fas fa-chevron-right"></i> Inicio</a></li>
+                    <li><a href="#servicios"><i class="fas fa-chevron-right"></i> Servicios</a></li>
+                    <li><a href="#banking"><i class="fas fa-chevron-right"></i> Banca en línea</a></li>
+                    <li><a href="#tienda"><i class="fas fa-chevron-right"></i> Tienda</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Servicios</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Crédito y Financiación</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Asesoramiento en Inversiones</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Seguros y Protección</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Servicios Inmobiliarios</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Legal</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Términos y Condiciones</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Política de Privacidad</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Política de Cookies</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Aviso Legal</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Fms Remit Online. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <div class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // Menu mobile toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Language selector
+        const languageBtn = document.querySelector('.language-btn');
+        const languageDropdown = document.querySelector('.language-dropdown');
+        
+        languageBtn.addEventListener('click', () => {
+            languageDropdown.classList.toggle('show');
+        });
+
+        // Close language dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!languageBtn.contains(e.target) && !languageDropdown.contains(e.target)) {
+                languageDropdown.classList.remove('show');
+            }
+        });
+
+        // Banking tabs
+        const bankingTabs = document.querySelectorAll('.banking-tab');
+        const tabPanes = document.querySelectorAll('.tab-pane');
+        
+        bankingTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const target = tab.dataset.tab;
+                
+                // Update active tab
+                bankingTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // Show target pane
+                tabPanes.forEach(pane => {
+                    pane.classList.remove('active');
+                    if (pane.id === target) {
+                        pane.classList.add('active');
+                    }
+                });
+            });
+        });
+
+        // Back to top button
+        const backToTop = document.querySelector('.back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+        
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    // Close mobile menu if open
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with animation
+        document.querySelectorAll('.service-card, .product-card, .stat-item, .testimonial, .about-text').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Form submission
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('¡Gracias por su solicitud! Nos pondremos en contacto con usted lo antes posible.');
+        }); "none";  });
+        // Gestion de l'authentification
+const authModal = document.getElementById('auth-modal');
+const loginBtn = document.getElementById('login-btn');
+const bankingLoginBtn = document.getElementById('banking-login-btn');
+const closeModal = document.querySelector('.close-modal');
+const authTabs = document.querySelectorAll('.auth-tab');
+const loginForm = document.getElementById('login-form');
+const registerForm = document.getElementById('register-form');
+const bankingPublic = document.getElementById('banking-login-required');
+const bankingPrivate = document.getElementById('banking-private');
+
+// Ouvrir modal
+loginBtn.addEventListener('click', () => {
+    authModal.classList.add('active');
+});
+
+bankingLoginBtn.addEventListener('click', () => {
+    authModal.classList.add('active');
+});
+
+// Fermer modal
+closeModal.addEventListener('click', () => {
+    authModal.classList.remove('active');
+});
+
+// Changer entre login et register
+authTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+        const target = tab.dataset.tab;
+        
+        authTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        
+        if (target === 'login') {
+            loginForm.style.display = 'block';
+            registerForm.style.display = 'none';
+        } else {
+            loginForm.style.display = 'none';
+            registerForm.style.display = 'block';
+        }
+    });
+});
+
+// Simulation de connexion
+loginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    // En réalité, ici on enverrait les données au serveur
+    bankingPublic.style.display = 'none';
+    bankingPrivate.style.display = 'block';
+    authModal.classList.remove('active');
+    
+    // Mettre à jour le header
+    document.querySelector('.auth-buttons').innerHTML = `
+        <button class="cta-button" id="logout-btn" style="padding: 0.5rem 1.5rem; background: #666;">
+            Cerrar Sesión
+        </button>
+    `;
+    
+    // Ajouter événement de déconnexion
+    document.getElementById('logout-btn').addEventListener('click', () => {
+        bankingPublic.style.display = 'block';
+        bankingPrivate.style.display = 'none';
+        document.querySelector('.auth-buttons').innerHTML = `
+            <button class="cta-button" id="login-btn" style="padding: 0.5rem 1.5rem;">Iniciar Sesión</button>
+        `;
+        // Réinitialiser l'événement sur le nouveau bouton
+        document.getElementById('login-btn').addEventListener('click', () => {
+            authModal.classList.add('active');
+        });
+    });
+});
+
+// Simulation d'inscription
+registerForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    // Ici, on enregistrerait le compte en base de données
+    alert('Cuenta creada con éxito. Ahora puede iniciar sesión.');
+    // Basculer vers l'onglet de connexion
+    authTabs[0].click();
+});
+// Gestion multilingue basique
+const translations = {
+    'es': {
+        'welcome': 'Bienvenido a Fms Remit Online',
+        'services': 'Servicios',
+        'banking': 'Banca en línea',
+        'store': 'Tienda',
+        'about': 'Nosotros',
+        'contact': 'Contacto',
+        'login': 'Iniciar Sesión'
+    },
+    'fr': {
+        'welcome': 'Bienvenue sur Fms Remit Online',
+        'services': 'Services',
+        'banking': 'Banque en ligne',
+        'store': 'Boutique',
+        'about': 'À propos',
+        'contact': 'Contact',
+        'login': 'Connexion'
+    },
+    'en': {
+        'welcome': 'Welcome to Fms Remit Online',
+        'services': 'Services',
+        'banking': 'Online Banking',
+        'store': 'Store',
+        'about': 'About Us',
+        'contact': 'Contact',
+        'login': 'Login'
+    }
+    // Ajoutez d'autres langues selon le même modèle
+};
+
+document.querySelectorAll('.language-option').forEach(option => {
+    option.addEventListener('click', () => {
+        const lang = option.dataset.lang;
+        changeLanguage(lang);
+    });
+});
+
+function changeLanguage(lang) {
+    // Changer les textes des éléments avec des attributs data-i18n
+    document.querySelectorAll('[data-i18n]').forEach(element => {
+        const key = element.getAttribute('data-i18n');
+        if (translations[lang] && translations[lang][key]) {
+            element.textContent = translations[lang][key];
+        }
+    });
+    
+    // Mettre à jour le bouton de langue
+    document.querySelector('.language-btn').innerHTML = `
+        <i class="fas fa-globe"></i>
+        ${lang.toUpperCase()}
+    `;
+    
+    // Fermer le dropdown
+    document.querySelector('.language-dropdown').classList.remove('show');
+}
+    </script>
+<!-- Bouton pour ouvrir le modal -->
+<button id="openModalBtn" class="btn-login">Se connecter</button>
+
+<!-- Modal -->
+<div class="modal" id="authModal">
+  <div class="modal-content">
+    <span class="close-modal" id="closeModalBtn">&times;</span>
+    
+    <!-- Onglets connexion / inscription -->
+    <div class="auth-tabs">
+      <div class="auth-tab active" id="loginTab">Connexion</div>
+      <div class="auth-tab" id="registerTab">Inscription</div>
+    </div>
+
+    <!-- Formulaire de connexion -->
+    <form class="auth-form" id="loginForm">
+      <input type="email" placeholder="Email" required class="input-field">
+      <input type="password" placeholder="Mot de passe" required class="input-field">
+      <button type="submit" class="btn-primary">Se connecter</button>
+    </form>
+
+    <!-- Formulaire d'inscription (caché par défaut) -->
+    <form class="auth-form" id="registerForm" style="display: none;">
+      <input type="text" placeholder="Nom complet" required class="input-field">
+      <input type="email" placeholder="Email" required class="input-field">
+      <input type="password" placeholder="Mot de passe" required class="input-field">
+      <button type="submit" class="btn-secondary">S'inscrire</button>
+    </form>
+  </div>
+</div>
+         <script>
+    // Toggle affichage du menu
+    document.querySelector(".language-btn").addEventListener("click", function(e) {
+        e.stopPropagation(); // empêche de fermer directement
+        document.querySelector(".language-dropdown").classList.toggle("active");
+        document.querySelector(".language-dropdown").style.display =
+            document.querySelector(".language-dropdown").style.display === "block" ? "none" : "block";
+    });
+
+    // Fermer si on clique ailleurs
+    window.addEventListener("click", function() {
+        document.querySelector(".language-dropdown").style.display = "none";
+    });
+
+    // Quand on choisit une langue
+    document.querySelectorAll(".language-option").forEach(option => {
+        option.addEventListener("click", function() {
+            let code = this.getAttribute("data-lang");
+            document.querySelector(".language-btn").innerHTML = `<i class="fas fa-globe"></i> ${code.toUpperCase()}`;
+            document.querySelector(".language-dropdown").style.display = "none";
+            // 👉 Ici, tu peux ajouter ton code pour charger la traduction (rediriger, changer texte, etc.)
+        });
+    });
+</script>   
+</body>
+</html>
