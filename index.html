@@ -1,0 +1,1581 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BancoRemit - Soluciones Bancarias Internacionales</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a5276;
+            --secondary: red;
+            --accent: #f39c12;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #27ae60;
+            --danger: #e74c3c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 28px;
+            color: var(--accent);
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .language-selector {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .language-flag {
+            width: 30px;
+            height: 20px;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.3s, transform 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .language-flag:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .language-flag.active {
+            opacity: 1;
+            border-color: var(--accent);
+            transform: scale(1.1);
+        }
+
+        /* Auth Buttons */
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 30px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-login {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn-login:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-register {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-register:hover {
+            background: #e67e22;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(26, 82, 118, 0.8), rgba(46, 134, 193, 0.8)), url('https://calcularsueldo.com.ar/wp-content/uploads/2024/03/plazos-fijos-bancos.webp');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .btn-hero {
+            background: var(--accent);
+            color: white;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+
+        .btn-hero:hover {
+            background: #e67e22;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* About Section */
+        .about {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--primary);
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+
+        .about-text p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 80px 0;
+            background: var(--light);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-icon {
+            font-size: 50px;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .service-card p {
+            color: #666;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            font-size: 60px;
+            color: var(--secondary);
+            opacity: 0.2;
+            position: absolute;
+            top: 10px;
+            left: 15px;
+        }
+
+        .testimonial-content {
+            margin-bottom: 20px;
+            font-style: italic;
+            color: #555;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .author-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .author-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .author-details h4 {
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .author-details p {
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 80px 0;
+            background: var(--light);
+        }
+
+        .contact-form {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: var(--secondary);
+            outline: none;
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .btn-submit {
+            background: var(--primary);
+            color: white;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-submit:hover {
+            background: var(--secondary);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .footer-column p, .footer-column a {
+            color: #bbb;
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--light);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        /* Auth Modals */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 450px;
+            padding: 40px;
+            position: relative;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: var(--danger);
+        }
+
+        .modal-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--primary);
+        }
+
+        .auth-form .form-group {
+            margin-bottom: 20px;
+        }
+
+        .auth-form .btn-submit {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .auth-form-footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #777;
+        }
+
+        .auth-form-footer a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .auth-buttons {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .contact-form {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-landmark"></i>
+                <h1>Fms BancoRemit</h1>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="#about">À propos</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#testimonials">Témoignages</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <div class="language-selector">
+                <img src="https://flagcdn.com/w40/es.png" srcset="https://flagcdn.com/w80/es.png 2x" width="40" alt="Espagnol" class="language-flag active" data-lang="es">
+                <img src="https://flagcdn.com/w40/fr.png" srcset="https://flagcdn.com/w80/fr.png 2x" width="40" alt="Français" class="language-flag" data-lang="fr">
+                <img src="https://flagcdn.com/w40/gb.png" srcset="https://flagcdn.com/w80/gb.png 2x" width="40" alt="Anglais" class="language-flag" data-lang="en">
+                <img src="https://flagcdn.com/w40/pt.png" srcset="https://flagcdn.com/w80/pt.png 2x" width="40" alt="Portugais" class="language-flag" data-lang="pt">
+                <img src="https://flagcdn.com/w40/de.png" srcset="https://flagcdn.com/w80/de.png 2x" width="40" alt="Allemand" class="language-flag" data-lang="de">
+            </div>
+            
+            <div class="auth-buttons">
+                <button class="btn btn-login" id="loginBtn">Connexion</button>
+                <button class="btn btn-register" id="registerBtn">Inscription</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2>Solutions Financières Internationales</h2>
+            <p>Depuis plus de 15 ans, nous offrons des services bancaires et financiers de première classe à une clientèle internationale exigeante.</p>
+            <button class="btn btn-hero">Découvrir nos services</button>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title">À propos de nous</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>15 ans d'excellence bancaire</h3>
+                    <p>Fondée en 2010, "RemitBanco" s'est imposée comme un acteur majeur dans le secteur des services financiers internationaux. Notre expérience et notre expertise nous permettent d'offrir à nos clients des solutions sur mesure adaptées à leurs besoins spécifiques.</p>
+                    <p>Notre mission est de fournir des services financiers de la plus haute qualité, en alliant innovation technologique et savoir-faire traditionnel. Nous nous engageons à maintenir les plus hauts standards d'intégrité et de professionnalisme.</p>
+                    <p>Présent dans tout les pays du globe, et une équipe de plus de 3000 experts, nous sommes parfaitement positionnés pour servir une clientèle internationale exigeante.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://pbs.twimg.com/media/Dme-3ZtXoAA9yb8.jpg" alt="À propos de BancoRemit">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2 class="section-title">Nos services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Services Financiers</h3>
+                    <p>Gestion de patrimoine, investissements, planification financière et services bancaires privés pour clients exigeants.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-piggy-bank"></i>
+                    </div>
+                    <h3>Solutions d'Épargne</h3>
+                    <p>Comptes d'épargne à taux préférentiels, plans d'investissement automatiques et solutions de capitalisation.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3>Investissement Immobilier</h3>
+                    <p>Conseils en investissement immobilier, gestion de propriétés et financement de projets immobiliers internationaux.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Conseil Financier</h3>
+                    <p>Conseils personnalisés en gestion de patrimoine, optimisation fiscale et planification successorale.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-gavel"></i>
+                    </div>
+                    <h3>Cabinet Juridique</h3>
+                    <p>Services juridiques spécialisés en droit financier international, fiscalité et conformité réglementaire.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">Témoignages</h2>
+            <div class="testimonials-grid">
+                <!-- Témoignages seront générés par JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Nous contacter</h2>
+            <div class="contact-form">
+                <div class="form-group">
+                    <label for="name">Nom complet</label>
+                    <input type="text" id="name" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Adresse email</label>
+                    <input type="email" id="email" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="service">Service concerné</label>
+                    <select id="service" class="form-control" required>
+                        <option value="">Sélectionnez un service</option>
+                        <option value="finance">Services Financiers</option>
+                        <option value="savings">Solutions d'Épargne</option>
+                        <option value="realestate">Investissement Immobilier</option>
+                        <option value="advice">Conseil Financier</option>
+                        <option value="legal">Cabinet Juridique</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" class="form-control" required></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-submit">Envoyer le message</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>BancoRemit S.a</h3>
+                    <p>Soluciones bancarias y financieras internacionales desde 2010.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Nos services</h3>
+                    <a href="#">Services Financiers</a>
+                    <a href="#">Solutions d'Épargne</a>
+                    <a href="#">Investissement Immobilier</a>
+                    <a href="#">Conseil Financier</a>
+                    <a href="#">Cabinet Juridique</a>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Liens utiles</h3>
+                    <a href="#">À propos de nous</a>
+                    <a href="#">Notre équipe</a>
+                    <a href="#">Carrières</a>
+                    <a href="#">Blog</a>
+                    <a href="#">FAQ</a>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Coordonnées</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Avenue des Finances, Luxembourg</p>
+                    <p><i class="fas fa-phone"></i> +33 7 55 54 78 38</p>
+                    <p><i class="fas fa-envelope"></i> fmsremitonline@proton.me</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Fms Banco Remit S.a. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">Connexion</h2>
+            <form class="auth-form">
+                <div class="form-group">
+                    <label for="loginEmail">Adresse email</label>
+                    <input type="email" id="loginEmail" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="loginPassword">Mot de passe</label>
+                    <input type="password" id="loginPassword" class="form-control" required>
+                </div>
+                
+                <button type="submit" class="btn btn-submit">Se connecter</button>
+                
+                <div class="auth-form-footer">
+                    <p>Mot de passe oublié? <a href="#">Réinitialiser</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">Inscription</h2>
+            <form class="auth-form">
+                <div class="form-group">
+                    <label for="registerName">Nom complet</label>
+                    <input type="text" id="registerName" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerEmail">Adresse email</label>
+                    <input type="email" id="registerEmail" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerPassword">Mot de passe</label>
+                    <input type="password" id="registerPassword" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerConfirmPassword">Confirmer le mot de passe</label>
+                    <input type="password" id="registerConfirmPassword" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerCountry">Pays de résidence</label>
+                    <select id="registerCountry" class="form-control" required>
+                        <option value="">Sélectionnez votre pays</option>
+                        <option value="fr">France</option>
+                        <option value="es">Espagne</option>
+                        <option value="pt">Portugal</option>
+                        <option value="de">Allemagne</option>
+                        <option value="lu">Luxembourg</option>
+                        <option value="ch">Suisse</option>
+                      <option value="en">England</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="btn btn-submit">Créer un compte</button>
+                
+                <div class="auth-form-footer">
+                    <p>En vous inscrivant, vous acceptez nos <a href="#">Conditions d'utilisation</a> et notre <a href="#">Politique de confidentialité</a>.</p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Données pour les témoignages
+        const testimonials = [
+            {
+                name: "Sophie Martin",
+                ethnicity: "Française",
+                content: "RemitBanco a transformé la façon dont je gère mes investissements. Leur approche personnalisée et leur expertise internationale sont inégalées.",
+                image: "https://randomuser.me/api/portraits/women/32.jpg"
+            },
+            {
+                name: "Carlos Rodriguez",
+                ethnicity: "Espagnol",
+                content: "Llevo más de 10 años confiando en RemitBanco para la gestión de mis activos. Asesores competentes y atentos.",
+                image: "https://randomuser.me/api/portraits/men/22.jpg"
+            },
+            {
+                name: "Emma Weber",
+                ethnicity: "Allemande",
+                content: "Ihre Anwaltskanzlei hat mir geholfen, mich durch die Komplexität der internationalen Besteuerung zu navigieren. Einwandfreier Service.",
+                image: "https://randomuser.me/api/portraits/women/65.jpg"
+            },
+            {
+                name: "James Wilson",
+                ethnicity: "Britannique",
+                content: "J'ai considérablement accru mon épargne grâce aux solutions proposées par RemitBanco. Je les recommande vivement.",
+                image: "https://randomuser.me/api/portraits/men/42.jpg"
+            },
+            {
+                name: "Isabella Rossi",
+                ethnicity: "Italienne",
+                content: "Une équipe professionnelle qui offre un service personnalisé. Mes investissements immobiliers n'ont jamais été aussi rentables.",
+                image: "https://randomuser.me/api/portraits/women/57.jpg"
+            },
+            {
+                name: "Mohammed Al-Fayed",
+                ethnicity: "Émirati",
+                content: "RemitBanco comprend les besoins des clients internationaux. Leur approche multiculturelle fait toute la différence.",
+                image: "https://randomuser.me/api/portraits/men/75.jpg"
+            },
+            {
+                name: "Li Wei",
+                ethnicity: "Chinoise",
+                content: "Leur expertise en marchés asiatiques est impressionnante. Ils ont diversifié mon portefeuille avec beaucoup de succès.",
+                image: "https://randomuser.me/api/portraits/women/77.jpg"
+            },
+            {
+                name: "John Smith",
+                ethnicity: "Américain",
+                content: "As an expat, I particularly appreciate their understanding of international financial challenges. Exceptional service!",
+                image: "https://randomuser.me/api/portraits/men/35.jpg"
+            },
+            {
+                name: "Anna Kowalski",
+                ethnicity: "Polonaise",
+                content: "Des conseils financiers avisés et un service client réactif. RemitBanco a dépassé toutes mes attentes.",
+                image: "https://randomuser.me/api/portraits/women/26.jpg"
+            },
+            {
+                name: "Thomas Günter",
+                ethnicity: "Allemand",
+                content: "La digitalisation de leurs services est remarquable. Je peux gérer mes finances de n'importe où dans le monde.",
+                image: "https://randomuser.me/api/portraits/men/86.jpg"
+            },
+            {
+                name: "Olivia Dubois",
+                ethnicity: "Belge",
+                content: "Leur équipe juridique m'a aidé à structurer mes actifs de manière optimale. Un gain de temps et d'argent considérable.",
+                image: "https://randomuser.me/api/portraits/women/43.jpg"
+            },
+            {
+                name: "Hans Jensen",
+                ethnicity: "Danois",
+                content: "J'apprécie leur transparence et leur professionnalisme. Des frais clairs sans surprises désagréables.",
+                image: "https://randomuser.me/api/portraits/men/77.jpg"
+            },
+            {
+                name: "Elena Popescu",
+                ethnicity: "Roumaine",
+                content: "Ils ont créé un plan d'épargne sur mesure qui correspond parfaitement à mes objectifs de vie. Je me sens en confiance.",
+                image: "https://randomuser.me/api/portraits/women/68.jpg"
+            },
+            {
+                name: "Miguel Santos",
+                ethnicity: "Portugais",
+                content: "Leur plateforme de trading est intuitive et complète. J'ai tout ce dont j'ai besoin pour prendre des décisions éclairées.",
+                image: "https://randomuser.me/api/portraits/men/57.jpg"
+            },
+            {
+                name: "Yuki Tanaka",
+                ethnicity: "Japonaise",
+                content: "Leur analyse des marchés asiatiques est perspicace. Ils ont identifié des opportunités que d'autres avaient manquées.",
+                image: "https://randomuser.me/api/portraits/women/28.jpg"
+            },
+            {
+                name: "Paul Lefevre",
+                ethnicity: "Français",
+                content: "Un service client disponible 24/7 qui répond à toutes mes questions avec professionnalisme. Très rassurant.",
+                image: "https://randomuser.me/api/portraits/men/62.jpg"
+            },
+            {
+                name: "Maria Gonzalez",
+                ethnicity: "Mexicaine",
+                content: "Ils comprennent parfaitement les défis des entrepreneurs internationaux. Leurs solutions sont adaptées à mes besoins.",
+                image: "https://randomuser.me/api/portraits/women/73.jpg"
+            },
+            {
+                name: "Alexander Petrov",
+                ethnicity: "Russe",
+                content: "Leur approche de la diversification d'actifs est excellente. Mon portefeuille est bien équilibré et performant.",
+                image: "https://randomuser.me/api/portraits/men/92.jpg"
+            },
+            {
+                name: "Charlotte Berg",
+                ethnicity: "Suédoise",
+                content: "Leurs conseillers financiers sont à l'écoute et très compétents. Ils ont su optimiser ma stratégie de retraite.",
+                image: "https://randomuser.me/api/portraits/women/35.jpg"
+            },
+            {
+                name: "Ahmed Hassan",
+                ethnicity: "Égyptien",
+                content: "RemitBanco a une compréhension unique des marchés émergents. Leurs conseils m'ont été très profitables.",
+                image: "https://randomuser.me/api/portraits/men/83.jpg"
+            }
+        ];
+
+        // Données de traduction
+        const translations = {
+            es: {
+                // Header
+                "about": "Sobre nosotros",
+                "services": "Servicios",
+                "testimonials": "Testimonios",
+                "contact": "Contacto",
+                "login": "Iniciar sesión",
+                "register": "Registrarse",
+                
+                // Hero
+                "heroTitle": "Soluciones Financieras Internacionales",
+                "heroText": "Durante más de 15 años, hemos brindado servicios bancarios y financieros de primer nivel a una clientela internacional exigente.",
+                "heroButton": "Descubra nuestros servicios",
+                
+                // About
+                "aboutTitle": "Sobre nosotros",
+                "aboutSubtitle": "15 años de excelencia bancaria",
+                "aboutText1": "Fundada en 2010, RemitBanco se ha establecido como un actor importante en el sector de servicios financieros internacionales. Nuestra experiencia y know-how nos permiten ofrecer a nuestros clientes soluciones a medida adaptadas a sus necesidades específicas.",
+                "aboutText2": "Nuestra misión es proporcionar servicios financieros de la más alta calidad, combinando innovación tecnológica y know-how tradicional. Nos comprometemos a mantener los más altos estándares de integridad y profesionalismo.",
+                "aboutText3": "Presente en todos los países del globo, y un equipo de más de 3000 expertos, estamos perfectamente posicionados para servir a una clientela internacional exigente.",
+                
+                // Services
+                "servicesTitle": "Nuestros servicios",
+                "finance": "Servicios Financieros",
+                "financeText": "Gestión patrimonial, inversiones, planificación financiera y servicios bancarios privados para clientes exigentes.",
+                "savings": "Soluciones de Ahorro",
+                "savingsText": "Cuentas de ahorro con tasas preferenciales, planes de inversión automáticos y soluciones de capitalización.",
+                "realestate": "Inversión Inmobiliaria",
+                "realestateText": "Asesoramiento en inversión inmobiliaria, gestión de propiedades y financiación de proyectos inmobiliarios internacionales.",
+                "advice": "Asesoramiento Financiero",
+                "adviceText": "Asesoramiento personalizado en gestión patrimonial, optimización fiscal y planificación sucesoria.",
+                "legal": "Despacho Jurídico",
+                "legalText": "Servicios jurídicos especializados en derecho financiero internacional, fiscalidad y cumplimiento normativo.",
+                
+                // Testimonials
+                "testimonialsTitle": "Testimonios",
+                
+                // Contact
+                "contactTitle": "Contáctenos",
+                "name": "Nombre completo",
+                "email": "Dirección de correo electrónico",
+                "service": "Servicio de interés",
+                "selectService": "Seleccione un servicio",
+                "message": "Mensaje",
+                "send": "Enviar mensaje",
+                
+                // Footer
+                "footerServices": "Nuestros servicios",
+                "usefulLinks": "Enlaces útiles",
+                "aboutUs": "Sobre nosotros",
+                "ourTeam": "Nuestro equipo",
+                "careers": "Carreras",
+                "blog": "Blog",
+                "faq": "Preguntas frecuentes",
+                "contactInfo": "Información de contacto",
+                "rights": "Todos los derechos reservados.",
+                
+                // Auth Modals
+                "loginTitle": "Iniciar sesión",
+                "loginEmail": "Dirección de correo electrónico",
+                "loginPassword": "Contraseña",
+                "loginButton": "Iniciar sesión",
+                "forgotPassword": "¿Olvidó su contraseña?",
+                "reset": "Restablecer",
+                
+                "registerTitle": "Registrarse",
+                "registerName": "Nombre completo",
+                "registerEmail": "Dirección de correo electrónico",
+                "registerPassword": "Contraseña",
+                "registerConfirm": "Confirmar contraseña",
+                "registerCountry": "País de residencia",
+                "selectCountry": "Seleccione su país",
+                "registerButton": "Crear cuenta",
+                "terms": "Al registrarse, acepta nuestros",
+                "termsLink": "Términos de uso",
+                "policy": "y nuestra",
+                "policyLink": "Política de privacidad"
+            },
+            fr: {
+                // Header
+                "about": "À propos",
+                "services": "Services",
+                "testimonials": "Témoignages",
+                "contact": "Contact",
+                "login": "Connexion",
+                "register": "Inscription",
+                
+                // Hero
+                "heroTitle": "Solutions Financières Internationales",
+                "heroText": "Depuis plus de 15 ans, nous offrons des services bancaires et financiers de première classe à une clientèle internationale exigeante.",
+                "heroButton": "Découvrir nos services",
+                
+                // About
+                "aboutTitle": "À propos de nous",
+                "aboutSubtitle": "15 ans d'excellence bancaire",
+                "aboutText1": "Fondée en 2010, RemitBanco s'est imposée comme un acteur majeur dans le secteur des services financiers internationaux. Notre expérience et notre expertise nous permettent d'offrir à nos clients des solutions sur mesure adaptées à leurs besoins spécifiques.",
+                "aboutText2": "Notre mission est de fournir des services financiers de la plus haute qualité, en alliant innovation technologique et savoir-faire traditionnel. Nous nous engageons à maintenir les plus hauts standards d'intégrité et de professionnalisme.",
+                "aboutText3": "Présent dans tout les pays du globe, et une équipe de plus de 3000 experts, nous sommes parfaitement positionnés pour servir une clientèle internationale exigeante.",
+                
+                // Services
+                "servicesTitle": "Nos services",
+                "finance": "Services Financiers",
+                "financeText": "Gestion de patrimoine, investissements, planification financière et services bancaires privés pour clients exigeants.",
+                "savings": "Solutions d'Épargne",
+                "savingsText": "Comptes d'épargne à taux préférentiels, plans d'investissement automatiques et solutions de capitalisation.",
+                "realestate": "Investissement Immobilier",
+                "realestateText": "Conseils en investissement immobilier, gestion de propriétés et financement de projets immobiliers internationaux.",
+                "advice": "Conseil Financier",
+                "adviceText": "Conseils personnalisés en gestion de patrimoine, optimisation fiscale et planification successorale.",
+                "legal": "Cabinet Juridique",
+                "legalText": "Services juridiques spécialisés en droit financier international, fiscalité et conformité réglementaire.",
+                
+                // Testimonials
+                "testimonialsTitle": "Témoignages",
+                
+                // Contact
+                "contactTitle": "Nous contacter",
+                "name": "Nom complet",
+                "email": "Adresse email",
+                "service": "Service concerné",
+                "selectService": "Sélectionnez un service",
+                "message": "Message",
+                "send": "Envoyer le message",
+                
+                // Footer
+                "footerServices": "Nos services",
+                "usefulLinks": "Liens utiles",
+                "aboutUs": "À propos de nous",
+                "ourTeam": "Notre équipe",
+                "careers": "Carrières",
+                "blog": "Blog",
+                "faq": "FAQ",
+                "contactInfo": "Coordonnées",
+                "rights": "Tous droits réservés.",
+                
+                // Auth Modals
+                "loginTitle": "Connexion",
+                "loginEmail": "Adresse email",
+                "loginPassword": "Mot de passe",
+                "loginButton": "Se connecter",
+                "forgotPassword": "Mot de passe oublié?",
+                "reset": "Réinitialiser",
+                
+                "registerTitle": "Inscription",
+                "registerName": "Nom complet",
+                "registerEmail": "Adresse email",
+                "registerPassword": "Mot de passe",
+                "registerConfirm": "Confirmer le mot de passe",
+                "registerCountry": "Pays de résidence",
+                "selectCountry": "Sélectionnez votre pays",
+                "registerButton": "Créer un compte",
+                "terms": "En vous inscrivant, vous acceptez nos",
+                "termsLink": "Conditions d'utilisation",
+                "policy": "et notre",
+                "policyLink": "Politique de confidentialité"
+            },
+            en: {
+                // Header
+                "about": "About",
+                "services": "Services",
+                "testimonials": "Testimonials",
+                "contact": "Contact",
+                "login": "Login",
+                "register": "Register",
+                
+                // Hero
+                "heroTitle": "International Financial Solutions",
+                "heroText": "For over 15 years, we have provided first-class banking and financial services to demanding international clients.",
+                "heroButton": "Discover our services",
+                
+                // About
+                "aboutTitle": "About us",
+                "aboutSubtitle": "15 years of banking excellence",
+                "aboutText1": "Founded in 2010, RemitBanco has established itself as a major player in the international financial services sector. Our experience and expertise allow us to offer our clients tailor-made solutions adapted to their specific needs.",
+                "aboutText2": "Our mission is to provide financial services of the highest quality, combining technological innovation and traditional know-how. We are committed to maintaining the highest standards of integrity and professionalism.",
+                "aboutText3": "Present in all countries of the globe, and a team of over 3000 experts, we are perfectly positioned to serve a demanding international clientele.",
+                
+                // Services
+                "servicesTitle": "Our services",
+                "finance": "Financial Services",
+                "financeText": "Wealth management, investments, financial planning and private banking services for demanding clients.",
+                "savings": "Savings Solutions",
+                "savingsText": "Preferential rate savings accounts, automatic investment plans and capitalization solutions.",
+                "realestate": "Real Estate Investment",
+                "realestateText": "Real estate investment advice, property management and financing of international real estate projects.",
+                "advice": "Financial Advice",
+                "adviceText": "Personalized advice on wealth management, tax optimization and estate planning.",
+                "legal": "Legal Firm",
+                "legalText": "Specialized legal services in international financial law, taxation and regulatory compliance.",
+                
+                // Testimonials
+                "testimonialsTitle": "Testimonials",
+                
+                // Contact
+                "contactTitle": "Contact us",
+                "name": "Full name",
+                "email": "Email address",
+                "service": "Service of interest",
+                "selectService": "Select a service",
+                "message": "Message",
+                "send": "Send message",
+                
+                // Footer
+                "footerServices": "Our services",
+                "usefulLinks": "Useful links",
+                "aboutUs": "About us",
+                "ourTeam": "Our team",
+                "careers": "Careers",
+                "blog": "Blog",
+                "faq": "FAQ",
+                "contactInfo": "Contact information",
+                "rights": "All rights reserved.",
+                
+                // Auth Modals
+                "loginTitle": "Login",
+                "loginEmail": "Email address",
+                "loginPassword": "Password",
+                "loginButton": "Login",
+                "forgotPassword": "Forgot password?",
+                "reset": "Reset",
+                
+                "registerTitle": "Register",
+                "registerName": "Full name",
+                "registerEmail": "Email address",
+                "registerPassword": "Password",
+                "registerConfirm": "Confirm password",
+                "registerCountry": "Country of residence",
+                "selectCountry": "Select your country",
+                "registerButton": "Create account",
+                "terms": "By registering, you agree to our",
+                "termsLink": "Terms of use",
+                "policy": "and our",
+                "policyLink": "Privacy policy"
+            },
+            pt: {
+                // Header
+                "about": "Sobre",
+                "services": "Serviços",
+                "testimonials": "Depoimentos",
+                "contact": "Contato",
+                "login": "Login",
+                "register": "Registro",
+                
+                // Hero
+                "heroTitle": "Soluções Financeiras Internacionais",
+                "heroText": "Há mais de 15 anos, fornecemos serviços bancários e financeiros de primeira linha para clientes internacionais exigentes.",
+                "heroButton": "Descubra nossos serviços",
+                
+                // About
+                "aboutTitle": "Sobre nós",
+                "aboutSubtitle": "15 anos de excelência bancária",
+                "aboutText1": "Fundada em 2010, a BancoRemit se estabeleceu como um player importante no setor de serviços financeiros internacionais. Nossa experiência e know-how nos permitem oferecer soluções personalizadas adaptadas às necessidades específicas de nossos clientes.",
+                "aboutText2": "Nossa missão é fornecer serviços financeiros da mais alta qualidade, combinando inovação tecnológica e know-how tradicional. Estamos comprometidos em manter os mais altos padrões de integridade e profissionalismo.",
+                "aboutText3": "Presente em todos os países do globo, e uma equipe de mais de 3000 especialistas, estamos perfeitamente posicionados para atender uma clientela internacional exigente.",
+                
+                // Services
+                "servicesTitle": "Nossos serviços",
+                "finance": "Serviços Financeiros",
+                "financeText": "Gestão patrimonial, investimentos, planejamento financeiro e serviços de private banking para clientes exigentes.",
+                "savings": "Soluções de Poupança",
+                "savingsText": "Contas de poupança com taxas preferenciais, planos de investimento automáticos e soluções de capitalização.",
+                "realestate": "Investimento Imobiliário",
+                "realestateText": "Consultoria em investimento imobiliário, gestão de propriedades e financiamento de projetos imobiliários internacionais.",
+                "advice": "Consultoria Financeira",
+                "adviceText": "Consultoria personalizada em gestão patrimonial, otimização tributária e planejamento sucessório.",
+                "legal": "Escritório Jurídico",
+                "legalText": "Serviços jurídicos especializados em direito financeiro internacional, tributação e conformidade regulatória.",
+                
+                // Testimonials
+                "testimonialsTitle": "Depoimentos",
+                
+                // Contact
+                "contactTitle": "Entre em contato",
+                "name": "Nome completo",
+                "email": "Endereço de email",
+                "service": "Serviço de interesse",
+                "selectService": "Selecione um serviço",
+                "message": "Mensagem",
+                "send": "Enviar mensagem",
+                
+                // Footer
+                "footerServices": "Nossos serviços",
+                "usefulLinks": "Links úteis",
+                "aboutUs": "Sobre nós",
+                "ourTeam": "Nossa equipe",
+                "careers": "Carreiras",
+                "blog": "Blog",
+                "faq": "Perguntas frequentes",
+                "contactInfo": "Informações de contato",
+                "rights": "Todos os direitos reservados.",
+                
+                // Auth Modals
+                "loginTitle": "Login",
+                "loginEmail": "Endereço de email",
+                "loginPassword": "Senha",
+                "loginButton": "Entrar",
+                "forgotPassword": "Esqueceu a senha?",
+                "reset": "Redefinir",
+                
+                "registerTitle": "Registro",
+                "registerName": "Nome completo",
+                "registerEmail": "Endereço de email",
+                "registerPassword": "Senha",
+                "registerConfirm": "Confirmar senha",
+                "registerCountry": "País de residência",
+                "selectCountry": "Selecione seu país",
+                "registerButton": "Criar conta",
+                "terms": "Ao se registrar, você concorda com nossos",
+                "termsLink": "Termos de uso",
+                "policy": "e nossa",
+                "policyLink": "Política de privacidade"
+            },
+            de: {
+                // Header
+                "about": "Über uns",
+                "services": "Dienstleistungen",
+                "testimonials": "Erfahrungsberichte",
+                "contact": "Kontakt",
+                "login": "Anmeldung",
+                "register": "Registrierung",
+                
+                // Hero
+                "heroTitle": "Internationale Finanzlösungen",
+                "heroText": "Seit über 15 Jahren bieten wir erstklassige Bank- und Finanzdienstleistungen für anspruchsvolle internationale Kunden.",
+                "heroButton": "Entdecken Sie unsere Dienstleistungen",
+                
+                // About
+                "aboutTitle": "Über uns",
+                "aboutSubtitle": "15 Jahre Bankenexzellenz",
+                "aboutText1": "Gegründet im Jahr 2010, hat sich BancoRemit als wichtiger Akteur im Bereich der internationalen Finanzdienstleistungen etabliert. Unsere Erfahrung und Expertise ermöglicht es uns, unseren Kunden maßgeschneiderte Lösungen anzubieten, die auf ihre spezifischen Bedürfnisse zugeschnitten sind.",
+                "aboutText2": "Unsere Mission ist es, Finanzdienstleistungen von höchster Qualität zu提供, die technologische Innovation und traditionelles Know-how verbinden. Wir verpflichten uns, die höchsten Standards an Integrität und Professionalität zu wahren.",
+                "aboutText3": "MIn allen Ländern der Welt präsent, und einem Team von über 3000 Experten sind wir perfekt positioniert, um anspruchsvolle internationale Kunden zu bedienen.",
+                
+                // Services
+                "servicesTitle": "Unsere Dienstleistungen",
+                "finance": "Finanzdienstleistungen",
+                "financeText": "Vermögensverwaltung, Investitionen, Finanzplanung und Privatbankdienstleistungen für anspruchsvolle Kunden.",
+                "savings": "Sparlösungen",
+                "savingsText": "Sparkonten mit Vorzugsbedingungen, automatische Investitionspläne und Kapitalisierungslösungen.",
+                "realestate": "Immobilieninvestition",
+                "realestateText": "Immobilieninvestitionsberatung, Immobilienverwaltung und Finanzierung internationaler Immobilienprojekte.",
+                "advice": "Finanzberatung",
+                "adviceText": "Persönliche Beratung in den Bereichen Vermögensverwaltung, Steueroptimierung und Nachfolgeplanung.",
+                "legal": "Rechtsanwaltskanzlei",
+                "legalText": "Spezialisierte Rechtsdienstleistungen in den Bereichen internationales Finanzrecht, Steuern und regulatorische Compliance.",
+                
+                // Testimonials
+                "testimonialsTitle": "Erfahrungsberichte",
+                
+                // Contact
+                "contactTitle": "Kontaktieren Sie uns",
+                "name": "Vollständiger Name",
+                "email": "E-Mail-Adresse",
+                "service": "Interessensdienstleistung",
+                "selectService": "Wählen Sie einen Service",
+                "message": "Nachricht",
+                "send": "Nachricht senden",
+                
+                // Footer
+                "footerServices": "Unsere Dienstleistungen",
+                "usefulLinks": "Nützliche Links",
+                "aboutUs": "Über uns",
+                "ourTeam": "Unser Team",
+                "careers": "Karriere",
+                "blog": "Blog",
+                "faq": "FAQ",
+                "contactInfo": "Kontaktinformationen",
+                "rights": "Alle Rechte vorbehalten.",
+                
+                // Auth Modals
+                "loginTitle": "Anmeldung",
+                "loginEmail": "E-Mail-Adresse",
+                "loginPassword": "Passwort",
+                "loginButton": "Anmelden",
+                "forgotPassword": "Passwort vergessen?",
+                "reset": "Zurücksetzen",
+                
+                "registerTitle": "Registrierung",
+                "registerName": "Vollständiger Name",
+                "registerEmail": "E-Mail-Adresse",
+                "registerPassword": "Passwort",
+                "registerConfirm": "Passwort bestätigen",
+                "registerCountry": "Land des Wohnsitzes",
+                "selectCountry": "Wählen Sie Ihr Land",
+                "registerButton": "Konto erstellen",
+                "terms": "Durch die Registrierung stimmen Sie unseren",
+                "termsLink": "Nutzungsbedingungen",
+                "policy": "und unserer",
+                "policyLink": "Datenschutzrichtlinie"
+            }
+        };
+
+        // Fonction pour changer la langue
+        function changeLanguage(lang) {
+            // Mettre à jour les flags
+            document.querySelectorAll('.language-flag').forEach(flag => {
+                if (flag.getAttribute('data-lang') === lang) {
+                    flag.classList.add('active');
+                } else {
+                    flag.classList.remove('active');
+                }
+            });
+            
+            // Récupérer les traductions
+            const t = translations[lang];
+            
+            // Mettre à jour la navigation
+            document.querySelectorAll('nav a').forEach((link, index) => {
+                const keys = ['about', 'services', 'testimonials', 'contact'];
+                if (index < keys.length) {
+                    link.textContent = t[keys[index]];
+                }
+            });
+            
+            // Mettre à jour les boutons d'authentification
+            document.getElementById('loginBtn').textContent = t['login'];
+            document.getElementById('registerBtn').textContent = t['register'];
+            
+            // Mettre à jour le hero
+            document.querySelector('.hero h2').textContent = t['heroTitle'];
+            document.querySelector('.hero p').textContent = t['heroText'];
+            document.querySelector('.btn-hero').textContent = t['heroButton'];
+            
+            // Mettre à jour la section about
+            document.querySelector('.about .section-title').textContent = t['aboutTitle'];
+            document.querySelector('.about-text h3').textContent = t['aboutSubtitle'];
+            document.querySelectorAll('.about-text p')[0].textContent = t['aboutText1'];
+            document.querySelectorAll('.about-text p')[1].textContent = t['aboutText2'];
+            document.querySelectorAll('.about-text p')[2].textContent = t['aboutText3'];
+            
+            // Mettre à jour la section services
+            document.querySelector('.services .section-title').textContent = t['servicesTitle'];
+            const serviceTitles = document.querySelectorAll('.service-card h3');
+            const serviceTexts = document.querySelectorAll('.service-card p');
+            
+            serviceTitles[0].textContent = t['finance'];
+            serviceTexts[0].textContent = t['financeText'];
+            
+            serviceTitles[1].textContent = t['savings'];
+            serviceTexts[1].textContent = t['savingsText'];
+            
+            serviceTitles[2].textContent = t['realestate'];
+            serviceTexts[2].textContent = t['realestateText'];
+            
+            serviceTitles[3].textContent = t['advice'];
+            serviceTexts[3].textContent = t['adviceText'];
+            
+            serviceTitles[4].textContent = t['legal'];
+            serviceTexts[4].textContent = t['legalText'];
+            
+            // Mettre à jour la section témoignages
+            document.querySelector('.testimonials .section-title').textContent = t['testimonialsTitle'];
+            
+            // Mettre à jour la section contact
+            document.querySelector('.contact .section-title').textContent = t['contactTitle'];
+            document.querySelector('label[for="name"]').textContent = t['name'];
+            document.querySelector('label[for="email"]').textContent = t['email'];
+            document.querySelector('label[for="service"]').textContent = t['service'];
+            document.querySelector('label[for="message"]').textContent = t['message'];
+            document.querySelector('#service option[value=""]').textContent = t['selectService'];
+            document.querySelector('.btn-submit').textContent = t['send'];
+            
+            // Mettre à jour le footer
+            document.querySelectorAll('.footer-column h3')[1].textContent = t['footerServices'];
+            document.querySelectorAll('.footer-column h3')[2].textContent = t['usefulLinks'];
+            document.querySelectorAll('.footer-column a')[5].textContent = t['aboutUs'];
+            document.querySelectorAll('.footer-column a')[6].textContent = t['ourTeam'];
+            document.querySelectorAll('.footer-column a')[7].textContent = t['careers'];
+            document.querySelectorAll('.footer-column a')[8].textContent = t['blog'];
+            document.querySelectorAll('.footer-column a')[9].textContent = t['faq'];
+            document.querySelectorAll('.footer-column h3')[3].textContent = t['contactInfo'];
+            document.querySelector('.copyright p').innerHTML = `&copy; 2023 GlobalFinances. ${t['rights']}`;
+            
+            // Mettre à jour les modales
+            document.querySelector('#loginModal .modal-title').textContent = t['loginTitle'];
+            document.querySelector('#loginModal label[for="loginEmail"]').textContent = t['loginEmail'];
+            document.querySelector('#loginModal label[for="loginPassword"]').textContent = t['loginPassword'];
+            document.querySelector('#loginModal .btn-submit').textContent = t['loginButton'];
+            document.querySelector('#loginModal .auth-form-footer p').innerHTML = `${t['forgotPassword']} <a href="#">${t['reset']}</a>`;
+            
+            document.querySelector('#registerModal .modal-title').textContent = t['registerTitle'];
+            document.querySelector('#registerModal label[for="registerName"]').textContent = t['registerName'];
+            document.querySelector('#registerModal label[for="registerEmail"]').textContent = t['registerEmail'];
+            document.querySelector('#registerModal label[for="registerPassword"]').textContent = t['registerPassword'];
+            document.querySelector('#registerModal label[for="registerConfirmPassword"]').textContent = t['registerConfirm'];
+            document.querySelector('#registerModal label[for="registerCountry"]').textContent = t['registerCountry'];
+            document.querySelector('#registerModal .btn-submit').textContent = t['registerButton'];
+            document.querySelector('#registerCountry option[value=""]').textContent = t['selectCountry'];
+            document.querySelector('#registerModal .auth-form-footer p').innerHTML = `${t['terms']} <a href="#">${t['termsLink']}</a> ${t['policy']} <a href="#">${t['policyLink']}</a>.`;
+        }
+
+        // Fonction pour générer les témoignages
+        function generateTestimonials() {
+            const testimonialsGrid = document.querySelector('.testimonials-grid');
+            testimonialsGrid.innerHTML = '';
+            
+            testimonials.forEach(testimonial => {
+                const testimonialCard = document.createElement('div');
+                testimonialCard.className = 'testimonial-card';
+                
+                testimonialCard.innerHTML = `
+                    <div class="testimonial-content">${testimonial.content}</div>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="${testimonial.image}" alt="${testimonial.name}">
+                        </div>
+                        <div class="author-details">
+                            <h4>${testimonial.name}</h4>
+                            <p>${testimonial.ethnicity}</p>
+                        </div>
+                    </div>
+                `;
+                
+                testimonialsGrid.appendChild(testimonialCard);
+            });
+        }
+
+        // Gestion des modales
+        function setupModals() {
+            const loginBtn = document.getElementById('loginBtn');
+            const registerBtn = document.getElementById('registerBtn');
+            const loginModal = document.getElementById('loginModal');
+            const registerModal = document.getElementById('registerModal');
+            const closeButtons = document.querySelectorAll('.close-modal');
+            
+            loginBtn.addEventListener('click', () => {
+                loginModal.style.display = 'flex';
+            });
+            
+            registerBtn.addEventListener('click', () => {
+                registerModal.style.display = 'flex';
+            });
+            
+            closeButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    loginModal.style.display = 'none';
+                    registerModal.style.display = 'none';
+                });
+            });
+            
+            window.addEventListener('click', (e) => {
+                if (e.target === loginModal) {
+                    loginModal.style.display = 'none';
+                }
+                if (e.target === registerModal) {
+                    registerModal.style.display = 'none';
+                }
+            });
+        }
+
+        // Gestion du changement de langue
+        function setupLanguageSelector() {
+            const flags = document.querySelectorAll('.language-flag');
+            
+            flags.forEach(flag => {
+                flag.addEventListener('click', () => {
+                    const lang = flag.getAttribute('data-lang');
+                    changeLanguage(lang);
+                });
+            });
+        }
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', () => {
+            generateTestimonials();
+            setupModals();
+            setupLanguageSelector();
+            
+            // Définir la langue par défaut (espagnol)
+            changeLanguage('es');
+        });
+    </script>
+</body>
+</html>
